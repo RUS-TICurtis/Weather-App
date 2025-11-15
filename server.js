@@ -12,7 +12,7 @@ const API_KEY = process.env.WEATHER_API_KEY;
 const WEATHER_API_BASE_URL = 'https://api.openweathermap.org/data/2.5/weather';
 
 // Middleware to serve static files from the 'public' directory
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname)));
 
 // --- API Route to Fetch Weather Data ---
 app.get('/weather', async (req, res) => {
