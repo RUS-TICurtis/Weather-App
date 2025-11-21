@@ -72,4 +72,6 @@ app.listen(PORT, () => {
         console.log("!!! WARNING: API Key is missing. Check your .env file. The app will fail to fetch weather data.");
     }
     console.log(`----------------------\n`);
+
 });
+
