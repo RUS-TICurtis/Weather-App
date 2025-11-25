@@ -7,46 +7,48 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="card">
-        <div class="search">
-            <input type="text" id="cityInput" placeholder="Enter a city name" spellcheck="false">
-            <button id="searchBtn"><img src="search.png" alt="Search icon" ></button>
-        </div>
-
-
-        <div id="error" class="error-message hidden">
-            Invalid city name. Please check and try again.
-        </div>
-        
-        <div class="weather hidden">
-            
-            <img src="" class="Weather-icon" id="weatherIcon" alt="Weather Icon here">
-            
-            <h1 class="temp" id="temp">22°</h1>
-            
-            <h2 class="city" id="cityName">New york</h2>
-
-            <p class="description" id="weatherDesc">Description Here</p>
-            
-            <div class="details">
-                <div class="col">
-                    <img src="./images/humidity.png" alt="Humidity Icon here">
-                    <div>
-                        <p class="humidity" id="humidity">50%</p>
-                        <p>Humidity</p>
-                    </div>
-                </div>
-                <div class="col">
-                    <img src="./images/wind.png" alt="wind Icon here">
-                    <div>
-                        <p class="wind" id="wind">15 Km/h</p>
-                        <p>Wind Speed</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     
+  <div class="card">
+    <div class="search">
+      <input type="text" id="cityInput" placeholder="Enter a city name" spellcheck="false" />
+      <button id="searchBtn"><img src="search.png" alt="Search icon" /></button>
+    </div>
+
+    <div id="error" class="error-message hidden">
+      Invalid city name. Please check and try again.
+    </div>
+
+    <div class="weather hidden">
+      <img src="" class="Weather-icon" id="weatherIcon" alt="Weather Icon here" />
+
+      <h1 class="temp" id="temp">22°</h1>
+      <h2 class="city" id="cityName">Accra</h2>
+
+      <div class="weather-meta">
+        <p>
+          <span id="cityTime">06:48 AM | </span>
+          <span class="description" id="weatherDesc">Clear Sky</span>
+        </p>
+      </div>
+
+      <div class="details">
+        <div class="col">
+          <img src="./images/humidity.png" alt="Humidity Icon here" />
+          <div>
+            <p class="humidity" id="humidity">94%</p>
+            <p>Humidity</p>
+          </div>
+        </div>
+        <div class="col">
+          <img src="./images/wind.png" alt="Wind Icon here" />
+          <div>
+            <p class="wind" id="wind">11 Km/h</p>
+            <p>Wind Speed</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
