@@ -18,6 +18,7 @@
       border-radius: 20px;
       padding: 40px 35px;
       text-align: center;
+      position: relative; /* Needed for positioning the refresh icon */
     }
     .search {
       width: 100%;
@@ -46,6 +47,7 @@
       height: 60px;
       cursor: pointer;
       display: flex;
+      position: relative; /* Needed for the spinner pseudo-element */
       align-items: center;
       justify-content: center;
     }
@@ -53,6 +55,50 @@
       width: 18px;
       height: 18px;
       align-self: center;
+    }
+    /* When the button is loading, hide the icon */
+    .search button.loading img {
+      visibility: hidden;
+    }
+    /* Style for the spinner pseudo-element */
+    .search button.loading::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      border: 3px solid #5b548a;
+      border-top-color: transparent;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    /* Keyframe animation for the spinner */
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+    /* Style for disabled state */
+    .search input:disabled, .search button:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+    #refreshBtn {
+      position: absolute;
+      top: 18px;
+      left: 18px;
+      width: 24px;
+      height: 24px;
+      cursor: pointer;
+      opacity: 0.7;
+      transition: opacity 0.3s, transform 0.3s;
+    }
+    #refreshBtn:hover {
+      opacity: 1;
+      transform: rotate(90deg);
+    }
+    #refreshBtn.loading {
+      animation: spin 1.2s linear infinite;
+      pointer-events: none; /* Prevent clicking while loading */
     }
     .Weather-icon {
       width: 170px;
@@ -116,3 +162,116 @@
     .hidden {
       display: none !important;
     }
+    /* --- Skeleton Loader Styles --- */
+
+/* When loading, add a shimmer animation */
+.weather.loading {
+  position: relative;
+  overflow: hidden;
+  /* We no longer need to override the background. The placeholders will appear on top of the card's gradient. */
+}
+
+.weather.loading::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* Style the placeholder elements */
+.weather.loading .Weather-icon,
+.weather.loading .temp,
+.weather.loading .city,
+.weather.loading .weather-meta,
+.weather.loading .details p {
+  background-color: rgba(255, 255, 255, 0.25); /* A semi-transparent white that blends better */
+  color: transparent; /* Hide the actual text */
+  border-radius: 4px;
+}
+
+.weather.loading .Weather-icon {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%; /* Make the icon placeholder a circle */
+}
+
+.weather.loading .details img {
+  visibility: hidden; /* Hide the small humidity/wind icons */
+}
+
+/* --- Popup Modal Styles --- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.modal-overlay.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.modal-content {
+  background: #ffebee; /* Light red background for warning */
+  color: #c62828; /* Darker red text */
+  padding: 30px 40px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  transform: scale(1);
+  transition: transform 0.3s ease;
+  font-size: 18px;
+  font-weight: 500;
+  position: relative; /* For positioning the close button */
+  border-left: 5px solid #c62828; /* Accent border */
+}
+
+.modal-overlay.hidden .modal-content {
+  transform: scale(0.9);
+}
+.modal-content p {
+  margin: 0 0 20px 0; /* Add bottom margin to create space for the button */
+}
+
+.close-btn {
+  /* Reset positioning and transform into a styled button */
+  background: #c62828; /* Dark red background */
+  color: #fff; /* White text */
+  border: none;
+  border-radius: 8px;
+  padding: 10px 30px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  /* Remove absolute positioning properties */
+  /* position: absolute; top: 8px; right: 12px; */
+}
+.close-btn:hover {
+  background-color: #b71c1c; /* Slightly darker red on hover */
+}
+.close-btn:active {
+  transform: scale(0.95); /* Add a press effect */
+}

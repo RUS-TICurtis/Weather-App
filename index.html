@@ -9,6 +9,8 @@
 <body>
     
   <div class="card">
+    <img src="images/refresh.png" alt="Refresh Location" id="refreshBtn" title="Get my location" />
+
     <div class="search">
       <input type="text" id="cityInput" placeholder="Enter a city name" spellcheck="false" />
       <button id="searchBtn"><img src="search.png" alt="Search icon" /></button>
@@ -49,6 +51,15 @@
       </div>
     </div>
     </div>
+
+    <!-- Popup Modal for validation errors -->
+    <div id="popupModal" class="modal-overlay hidden">
+      <div class="modal-content">
+        <p id="popupMessage"></p>
+        <button id="closePopupBtn" class="close-btn">OK</button>
+      </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
