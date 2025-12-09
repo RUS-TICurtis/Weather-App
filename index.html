@@ -37,6 +37,10 @@
         Invalid city name. Please check and try again.
       </div>
 
+      <!-- NEW: Wrapper for content to ensure correct stacking -->
+      <div class="content-wrapper">
+
+
       <div id="locationNotice" class="location-notice hidden"></div>
       <div class="weather hidden">
         <!-- Current Weather Display -->
@@ -53,7 +57,7 @@
         <!-- Details remain at the bottom -->
         <div class="details">
           <div class="col">
-            <img src="./images/humidity.png" alt="Humidity Icon here" />
+            <img src="./images/humidity-white.png" alt="Humidity Icon here" class="humidity-icon" />
             <div>
               <p class="humidity" id="humidity">94%</p>
               <p>Humidity</p>
@@ -76,6 +80,8 @@
             </div>
         </div>
       </div>
+
+      </div> <!-- End of content-wrapper -->
 
       <!-- Popup Modals remain inside the main card -->
       <div id="popupModal" class="modal-overlay hidden">

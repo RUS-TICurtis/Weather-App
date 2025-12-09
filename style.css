@@ -20,7 +20,7 @@
     .card {
       width: 90%;
       max-width: 470px;
-      background: linear-gradient(125deg, #73cddb, #ffcc33, #5b548a, #ff9966, #2a88e6, #8a2be2, #008080, #a1ddcd);
+      background: linear-gradient(125deg, #73cddb, #ffcc33, #5b548a, #ff9966, #2a88e6, #8a2be2, #008080, #a1ddcd); /* A comment to ensure diff is not empty if no other changes are made */
       color: #fff;
       margin: 0px  0;
       border-radius: 20px;
@@ -179,6 +179,12 @@
     .search input:disabled, .search button:disabled {
       opacity: 0.7;
       cursor: not-allowed;
+    }
+    /* NEW: Wrapper to control stacking context */
+    .content-wrapper {
+      position: relative;
+      z-index: 2;
+      background: transparent; /* Ensure it has no background color */
     }
     #menuBtn {
       position: absolute;
@@ -404,11 +410,15 @@
     /* Responsive adjustments for smaller screens */
     @media (max-width: 480px) {
       body {
-        padding: 0 10px; /* Add horizontal padding so cards don't touch edges */
+        padding: 20px 10px; /* Add vertical and horizontal padding */
+        align-items: flex-start; /* Align content to the top */
+        min-height: 0; /* Allow body to grow with content */
       }
       .app-wrapper {
         flex-direction: column;
         align-items: center; /* Center cards when stacked */
+        justify-content: flex-start; /* Align cards to the top */
+        gap: 20px; /* Add space between the stacked cards */
       }
       .card {
         padding: 25px 20px; /* Reduce padding on main card */
@@ -523,10 +533,6 @@
     .col img {
       width: 40px;
       margin-right: 10px;
-    }
-    /* Use a filter to invert the black humidity icon to white */
-    img[src*="humidity.png"] {
-      filter: invert(1);
     }
     .humidity, .wind {
       font-size: 28px;
