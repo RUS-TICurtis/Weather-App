@@ -38,6 +38,44 @@ const geoPromptModal = document.getElementById('geoPromptModal');
 const enableGeoBtn = document.getElementById('enableGeoBtn');
 const closeGeoBtn = document.getElementById('closeGeoBtn');
 
+// --- Weather Icon Mapping ---
+// Maps OpenWeatherMap icon codes to local image files when available
+function getWeatherIconPath(iconCode) {
+    // Mapping of OpenWeatherMap icon codes to local files
+    const iconMap = {
+        // Clear sky
+        '01d': './images/sunny.svg',
+        '01n': './images/clear_night.svg',
+
+        // Few clouds
+        '02d': './images/mostly_sunny.png',
+        '02n': './images/mostly_clear_night.png',
+
+        // Scattered clouds
+        '03d': './images/partly_cloudy.png',
+        '03n': './images/partly_cloudy_night.png',
+
+        // Broken clouds
+        '04d': './images/mostly_cloudy_day.png',
+        '04n': './images/mostly_cloudy_night.png',
+
+        // Shower rain
+        '09d': './images/scattered_showers_day.png',
+        '09n': './images/scattered_showers_night.png',
+
+        // Rain
+        '10d': './images/showers_rain.png',
+        '10n': './images/showers_rain.png',
+
+        // Thunderstorm
+        '11d': './images/isolated_scattered_tstorms_day.png',
+        '11n': './images/isolated_scattered_tstorms_night.png',
+    };
+
+    // Return local icon if available, otherwise use API icon
+    return iconMap[iconCode] || `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
+}
+
 // This function updates the DOM with weather data
 function updateWeatherDisplay(data) {
     // 1. Update City and Temp
@@ -46,20 +84,20 @@ function updateWeatherDisplay(data) {
 
     // 2. Update Description
     const description = data.weather[0].description;
-    weatherDescEl.innerText = description; 
-    
+    weatherDescEl.innerText = description;
+
     // 3. Update Weather Icon
     const iconCode = data.weather[0].icon;
-    weatherIconEl.src = `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
+    weatherIconEl.src = getWeatherIconPath(iconCode);
     weatherIconEl.alt = description;
 
     // 4. Update Details
     humidityEl.innerText = data.main.humidity + '%';
-    
+
     // Wind speed conversion for display
     const windSpeed = data.wind.speed !== undefined ? data.wind.speed : 0;
     const windSpeedKmH = Math.round(windSpeed * 3.6);
-    windEl.innerText = windSpeedKmH + ' Km/h'; 
+    windEl.innerText = windSpeedKmH + ' Km/h';
 
     // 5. Update City's Local Time
     const timezoneOffset = data.timezone; // Shift in seconds from UTC
@@ -149,7 +187,7 @@ function updateForecastDisplay(data) {
         dayElement.className = 'forecast-day';
         dayElement.innerHTML = `
             <p class="forecast-day-name">${dayName}</p>
-            <div class="forecast-icons"><img src="https://openweathermap.org/img/wn/${dayIcon}.png" alt="day icon" class="forecast-icon" /><img src="https://openweathermap.org/img/wn/${nightIcon}.png" alt="night icon" class="forecast-icon" /></div>
+            <div class="forecast-icons"><img src="${getWeatherIconPath(dayIcon)}" alt="day icon" class="forecast-icon" /><img src="${getWeatherIconPath(nightIcon)}" alt="night icon" class="forecast-icon" /></div>
             <p class="forecast-humidity"><i class="fas fa-tint"></i>${avgHumidity}%</p>
             <p class="forecast-temp">${maxTemp}°</p>
         `;
@@ -184,7 +222,7 @@ function updateTodayForecastDisplay(data) {
         itemElement.className = 'today-forecast-item';
         itemElement.innerHTML = `
             <p class="today-forecast-time">${time}</p>
-            <img src="https://openweathermap.org/img/wn/${icon}.png" alt="weather icon" class="today-forecast-icon" />
+            <img src="${getWeatherIconPath(icon)}" alt="weather icon" class="today-forecast-icon" />
             <p class="today-forecast-temp">${temp}°</p>
             <p class="today-forecast-humidity"><i class="fas fa-tint"></i>${humidity}%</p>
         `;
@@ -298,9 +336,9 @@ async function getWeather(cityOverride) {
     }
 
     const city = cityOverride || cityInput.value.trim();
-    
+
     // If it's a manual search (no override) and the input is empty, show popup.
-    if (!city && !cityOverride) { 
+    if (!city && !cityOverride) {
         showPopup('Please enter a city name.'); // Only show popup for manual empty search
         return;
     }
@@ -374,7 +412,7 @@ async function getWeatherByCoordinates(lat, lon) {
             fetch(`${BACKEND_URL}/weather-coords?lat=${lat}&lon=${lon}`),
             fetch(`${BACKEND_URL}/forecast-coords?lat=${lat}&lon=${lon}`)
         ]);
-        
+
         if (!weatherResponse.ok) {
             // Check content type before parsing as JSON
             const contentType = weatherResponse.headers.get('content-type');
@@ -507,7 +545,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-    
+
     // Handle button click
     if (searchBtn) {
         // Wrap getWeather in an anonymous function to prevent the event object

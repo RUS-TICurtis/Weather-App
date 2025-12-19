@@ -1,13 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weather App</title>
-    <!-- Add Font Awesome for icons -->
-    <link rel="stylesheet" href="fontawesome/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+
+  <!-- Mobile Browser Theme Colors -->
+  <meta name="theme-color" content="#101010">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <!-- iOS Web App Capable -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+
+  <!-- Prevent automatic phone number detection -->
+  <meta name="format-detection" content="telephone=no">
+
+  <title>Weather App</title>
+
+  <!-- Add Font Awesome for icons -->
+  <link rel="stylesheet" href="fontawesome/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
   <div class="app-wrapper">
     <!-- Main Weather Card -->
@@ -31,7 +46,8 @@
         <input type="text" id="cityInput" placeholder="Enter a city name" spellcheck="false" />
         <button id="searchBtn"><i class="fas fa-search"></i></button>
       </div>
-      <button id="refreshBtn" class="refresh-btn-bottom" title="Get my location"><i class="fas fa-location-dot"></i> Get my Location</button>
+      <button id="refreshBtn" class="refresh-btn-bottom" title="Get my location"><i class="fas fa-location-dot"></i> Get
+        my Location</button>
 
       <div id="error" class="error-message hidden">
         Invalid city name. Please check and try again.
@@ -41,45 +57,45 @@
       <div class="content-wrapper">
 
 
-      <div id="locationNotice" class="location-notice hidden"></div>
-      <div class="weather hidden">
-        <!-- Current Weather Display -->
-        <img src="https://openweathermap.org/img/wn/01d@2x.png" class="Weather-icon" id="weatherIcon" alt="Weather Icon here" />
-        <h1 class="temp" id="temp">22°</h1>
-        <h2 class="city" id="cityName">Accra</h2>
-        <div class="weather-meta">
-          <p>
-            <span id="cityTime">06:48 AM | </span>
-            <span class="description" id="weatherDesc">Clear Sky</span>
-          </p>
-        </div>
+        <div id="locationNotice" class="location-notice hidden"></div>
+        <div class="weather hidden">
+          <!-- Current Weather Display -->
+          <img src="./images/sunny.svg" class="Weather-icon" id="weatherIcon" alt="Weather Icon here" />
+          <h1 class="temp" id="temp">22°</h1>
+          <h2 class="city" id="cityName">Accra</h2>
+          <div class="weather-meta">
+            <p>
+              <span id="cityTime">06:48 AM | </span>
+              <span class="description" id="weatherDesc">Clear Sky</span>
+            </p>
+          </div>
 
-        <!-- Details remain at the bottom -->
-        <div class="details">
-          <div class="col">
-            <img src="./images/humidity-white.png" alt="Humidity Icon here" class="humidity-icon" />
-            <div>
-              <p class="humidity" id="humidity">94%</p>
-              <p>Humidity</p>
+          <!-- Details remain at the bottom -->
+          <div class="details">
+            <div class="col">
+              <img src="./images/humidity-white.png" alt="Humidity Icon here" class="humidity-icon" />
+              <div>
+                <p class="humidity" id="humidity">94%</p>
+                <p>Humidity</p>
+              </div>
+            </div>
+            <div class="col">
+              <img src="./images/wind.png" alt="Wind Icon here" />
+              <div>
+                <p class="wind" id="wind">11 Km/h</p>
+                <p>Wind Speed</p>
+              </div>
             </div>
           </div>
-          <div class="col">
-            <img src="./images/wind.png" alt="Wind Icon here" />
-            <div>
-              <p class="wind" id="wind">11 Km/h</p>
-              <p>Wind Speed</p>
-            </div>
-          </div>
-        </div>
 
-        <!-- NEW: Integrated Hourly Forecast Section -->
-        <div class="hourly-forecast-section">
+          <!-- NEW: Integrated Hourly Forecast Section -->
+          <div class="hourly-forecast-section">
             <!-- <h2 class="hourly-forecast-header">Next 24 Hours</h2> -->
             <div id="todayForecastContainer" class="today-forecast-container">
-                <!-- Hourly forecast items will be injected here -->
+              <!-- Hourly forecast items will be injected here -->
             </div>
+          </div>
         </div>
-      </div>
 
       </div> <!-- End of content-wrapper -->
 
@@ -111,6 +127,7 @@
 
   </div>
 
-    <script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
+
 </html>
